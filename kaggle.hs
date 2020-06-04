@@ -54,7 +54,7 @@ boring_meals []                  = False
 boring_meals (x:y:_) |  x == y   = True
 boring_meals (_:xs)              = boring_meals xs
 
--- | 	With for comprehensions
+-- | 
 boring_meals' :: (Num a, Ord a) => [a] -> Bool
 boring_meals' [] = False
 boring_meals' xs = any (\x -> fst x == snd x) $ zip xs (tail xs)
