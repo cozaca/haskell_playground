@@ -32,5 +32,29 @@ has_lucky_number'''' xs = or . map (\x -> x `mod` 7 == 0) $ xs
 -- | and give us a list of booleans like [False, False, True, True].
 -- | Implement a function that reproduces this behaviour, returning a list of booleans corresponding to whether the corresponding element is greater than n.
 
+-- | 	With map
 elemWise_gt :: (Ord a) => [a] -> a -> [Bool]
 elemWise_gt xs t = map (>t) xs
+
+-- | 	With pattern matching
+elemWise_gt' :: (Ord a) => [a] -> a -> [Bool]
+elemWise_gt' [] _     = []
+elemWise_gt' (x:xs) t = (x>t) : elemWise_gt' xs t
+
+-- | 	With for comprehensions
+elemWise_gt'' :: (Ord a) => [a] -> a -> [Bool]
+elemWise_gt'' xs t = [x > t | x <-xs]
+
+-- | 3. Given a list of meals served over some period of time, return True if the
+-- |    same meal has ever been served two days in a row, and False otherwise.
+
+-- | 	With pattern matching
+boring_meals :: (Num a, Eq a) => [a] -> Bool
+boring_meals []                  = False
+boring_meals (x:y:_) |  x == y   = True
+boring_meals (_:xs)              = boring_meals xs
+
+-- | 	With for comprehensions
+boring_meals' :: (Num a, Ord a) => [a] -> Bool
+boring_meals' [] = False
+boring_meals' xs = any (\x -> fst x == snd x) $ zip xs (tail xs)
