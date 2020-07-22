@@ -49,12 +49,12 @@ elemWise_gt'' xs t = [x > t | x <-xs]
 -- |    same meal has ever been served two days in a row, and False otherwise.
 
 -- | 	With pattern matching
-boring_meals :: (Num a, Eq a) => [a] -> Bool
+boring_meals :: (Ord a) => [a] -> Bool
 boring_meals []                  = False
 boring_meals (x:y:_) |  x == y   = True
 boring_meals (_:xs)              = boring_meals xs
 
 -- | 
-boring_meals' :: (Num a, Ord a) => [a] -> Bool
+boring_meals' :: (Ord a) => [a] -> Bool
 boring_meals' [] = False
 boring_meals' xs = any (\x -> fst x == snd x) $ zip xs (tail xs)
